@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Source_Serif_4, JetBrains_Mono } from "next/font/google";
+import {
+  ClerkProvider,
+} from "@clerk/nextjs";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -32,18 +35,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body
-        className={cn(
-          "min-h-full bg-background font-body text-foreground antialiased",
-          playfair.variable,
-          sourceSerif.variable,
-          jetbrainsMono.variable
-        )}
-      >
-        <div className="noise-bg fixed inset-0 z-50 pointer-events-none opacity-[0.02]" />
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className="h-full">
+        <body
+          className={cn(
+            "min-h-full bg-background font-body text-foreground antialiased",
+            playfair.variable,
+            sourceSerif.variable,
+            jetbrainsMono.variable
+          )}
+        >
+          <div className="noise-bg fixed inset-0 z-50 pointer-events-none opacity-[0.02]" />
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

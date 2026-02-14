@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { MobileMenu } from "@/components/ui/mobile-menu";
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 export default function LandingPage() {
   return (
@@ -13,12 +20,20 @@ export default function LandingPage() {
           <Link href="#about" className="text-xs font-mono uppercase tracking-widest hover:underline hover:underline-offset-4">About</Link>
         </nav>
         <nav className="hidden md:flex items-center gap-6">
-          <Link href="/login" className="text-sm font-mono uppercase tracking-widest hover:underline">
-            Login
-          </Link>
-          <Link href="/signup" className="hidden sm:inline-flex text-sm font-mono uppercase tracking-widest border-2 border-black px-6 py-2 hover:bg-black hover:text-white transition-colors duration-100">
-            Get Started
-          </Link>
+          <SignedOut>
+            <Link href="/login" className="text-sm font-mono uppercase tracking-widest hover:underline">
+              Login
+            </Link>
+            <Link href="/signup" className="hidden sm:inline-flex text-sm font-mono uppercase tracking-widest border-2 border-black px-6 py-2 hover:bg-black hover:text-white transition-colors duration-100">
+              Get Started
+            </Link>
+          </SignedOut>
+          <SignedIn>
+            <Link href="/dashboard" className="text-sm font-mono uppercase tracking-widest hover:underline mr-4">
+              Dashboard
+            </Link>
+            <UserButton />
+          </SignedIn>
         </nav>
         <MobileMenu />
       </header>

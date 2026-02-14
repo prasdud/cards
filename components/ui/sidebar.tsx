@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, CreditCard, Settings, User } from "lucide-react";
+import { LayoutDashboard, CreditCard, Settings, User, LogOut } from "lucide-react";
+import { useUser, SignOutButton } from "@clerk/nextjs";
 
 const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -14,6 +15,7 @@ const navigation = [
 
 export function SidebarContent() {
     const pathname = usePathname();
+    const { user } = useUser();
 
     return (
         <div className="flex h-full flex-col bg-background text-foreground">
@@ -44,14 +46,24 @@ export function SidebarContent() {
                     })}
                 </nav>
             </div>
-            <div className="border-t border-border p-4">
+            <div className="border-t border-border p-4 space-y-4">
                 <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-full bg-muted" />
-                    <div className="text-sm">
-                        <p className="font-medium">User Name</p>
-                        <p className="text-xs text-muted-foreground">user@example.com</p>
+                    <div className="h-8 w-8 rounded-full bg-muted overflow-hidden">
+                         {user?.imageUrl && (
+                            <img src={user.imageUrl} alt={user.fullName || "User"} className="h-full w-full object-cover" />
+                         )}
+                    </div>
+                    <div className="text-sm overflow-hidden">
+                        <p className="font-medium truncate">{user?.fullName || "User"}</p>
+                        <p className="text-xs text-muted-foreground truncate">{user?.primaryEmailAddress?.emailAddress}</p>
                     </div>
                 </div>
+                <SignOutButton redirectUrl="/">
+                    <button className="flex w-full items-center gap-3 px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground text-left">
+                        <LogOut className="h-4 w-4" />
+                        Log out
+                    </button>
+                </SignOutButton>
             </div>
         </div>
     );
