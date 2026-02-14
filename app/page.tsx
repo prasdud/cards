@@ -109,7 +109,7 @@ export default function LandingPage() {
                   </ul>
                 </div>
                 <Link href="/signup" className="mt-8 w-full block text-center border-2 border-black py-4 font-mono text-xs uppercase tracking-widest hover:bg-black hover:text-white transition-colors">
-                  Start Free
+                  Go Essentials
                 </Link>
               </div>
 
@@ -173,9 +173,9 @@ export default function LandingPage() {
       <footer className="border-t-4 border-black py-12 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6 bg-white">
         <Link href="/" className="font-serif text-lg font-bold">cards.</Link>
         <div className="flex gap-8">
-          <a href="#" className="font-mono text-xs uppercase tracking-widest hover:underline">Twitter</a>
-          <a href="#" className="font-mono text-xs uppercase tracking-widest hover:underline">Instagram</a>
-          <a href="#" className="font-mono text-xs uppercase tracking-widest hover:underline">LinkedIn</a>
+          <a href="https://x.com/prasdud" className="font-mono text-xs uppercase tracking-widest hover:underline" target="_blank" rel="noopener noreferrer">X</a>
+          <a href="https://github.com/prasdud" className="font-mono text-xs uppercase tracking-widest hover:underline" target="_blank" rel="noopener noreferrer">Github</a>
+          <a href="https://linkedin.com/in/mabdulmuid" className="font-mono text-xs uppercase tracking-widest hover:underline" target="_blank" rel="noopener noreferrer ">LinkedIn</a>
         </div>
         <span className="font-mono text-xs text-muted-foreground">© 2026. All rights reserved.</span>
       </footer>
