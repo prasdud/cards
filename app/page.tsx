@@ -49,7 +49,7 @@ export default function LandingPage() {
         <section id="features" className="border-t-4 border-black py-24 bg-black text-white">
           <div className="px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
-              { title: "Zero Noise", desc: "No gradients. No shadows. Just content." },
+              { title: "Zero Noise", desc: "No gradients. No shadows. Just content." }, // modify this
               { title: "Serif Typography", desc: "Editorial grade type handling." },
               { title: "Instant", desc: "No loading spinners. Pure speed." }
             ].map((feature, i) => (
@@ -66,16 +66,16 @@ export default function LandingPage() {
           <div className="max-w-4xl mx-auto space-y-16">
             <div className="text-center space-y-4">
               <h2 className="font-serif text-6xl md:text-7xl font-bold tracking-tighter">Pricing</h2>
-              <p className="font-serif text-xl text-muted-foreground italic">Simple tools for complex identities.</p>
+              <p className="font-serif text-xl text-muted-foreground italic">Buy once, own forever. Just like God intended.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Free Tier */}
               <div className="border-2 border-black p-8 md:p-12 flex flex-col justify-between min-h-[500px] hover:border-4 transition-all duration-100">
                 <div className="space-y-6">
-                  <h3 className="font-mono text-xs uppercase tracking-widest">Free</h3>
+                  <h3 className="font-mono text-xs uppercase tracking-widest">Essentials</h3>
                   <div className="font-serif text-5xl">
-                    $0<span className="text-lg text-muted-foreground italic">/forever</span>
+                    $1.99<span className="text-lg text-muted-foreground italic">/forever</span>
                   </div>
                   <p className="font-serif text-lg">Thinking of yourself.</p>
                   <ul className="space-y-4 pt-4">
@@ -89,7 +89,7 @@ export default function LandingPage() {
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 flex-shrink-0" />
-                      <span className="font-serif">Basic Analytics</span>
+                      <span className="font-serif">Custom Card URL</span>
                     </li>
                   </ul>
                 </div>
@@ -106,13 +106,13 @@ export default function LandingPage() {
                 <div className="space-y-6 z-10 relative">
                   <h3 className="font-mono text-xs uppercase tracking-widest text-white/70">Premium</h3>
                   <div className="font-serif text-5xl">
-                    $12<span className="text-lg text-white/50 italic">/month</span>
+                    $9.99<span className="text-lg text-white/50 italic">/forever</span>
                   </div>
                   <p className="font-serif text-lg text-white/90">Building an empire.</p>
                   <ul className="space-y-4 pt-4 text-white/80">
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 flex-shrink-0" />
-                      <span className="font-serif">100 Digital Cards</span>
+                      <span className="font-serif">Multiple Digital Cards</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 flex-shrink-0" />
@@ -120,7 +120,7 @@ export default function LandingPage() {
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 flex-shrink-0" />
-                      <span className="font-serif">Advanced & Export Analytics</span>
+                      <span className="font-serif">Custom Card URL's</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="w-5 h-5 flex-shrink-0" />
