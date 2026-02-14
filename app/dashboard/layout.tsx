@@ -1,5 +1,6 @@
 import { Sidebar } from "@/components/ui/sidebar";
 import { Topbar } from "@/components/ui/topbar";
+import { AvatarSync } from "@/components/profile/avatar-sync";
 
 export default function DashboardLayout({
     children,
@@ -8,6 +9,7 @@ export default function DashboardLayout({
 }) {
     return (
         <div className="flex h-screen overflow-hidden bg-background">
+            <AvatarSync />
             <Sidebar />
             <div className="flex flex-1 flex-col overflow-hidden">
                 <Topbar />

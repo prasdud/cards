@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^6.37.4",
     "@types/zxcvbn": "^4.4.5",
     "clsx": "^2.1.1",
+    "facehash": "^0.1.0",
     "framer-motion": "^12.34.0",
     "hono": "^4.11.9",
     "lucide-react": "^0.563.0",
