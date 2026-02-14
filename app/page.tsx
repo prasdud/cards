@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { MobileMenu } from "@/components/ui/mobile-menu";
@@ -8,6 +10,25 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import { CardCanvas } from "@/components/card/card-canvas";
+import { RolodexCard } from "@/components/rolodex/rolodex-card";
+import { ContactCard } from "@/types/card";
+
+// Dummy card data for the landing page
+const LANDING_CARD: ContactCard = {
+    id: "landing-demo",
+    slug: "jane-doe",
+    name: "Jane Doe",
+    role: "Creative Director",
+    company: "Studio 54",
+    email: "jane@studio54.com",
+    theme: {
+        variant: "monochrome",
+        fontHead: "serif",
+        fontBody: "sans",
+        texture: "noise"
+    }
+};
 
 export default function LandingPage() {
   return (
@@ -53,10 +74,17 @@ export default function LandingPage() {
               </Link>
             </div>
           </div>
-          <div className="relative h-[600px] w-full flex items-center justify-center bg-gray-50 border border-black/5">
-            {/* Visual placeholder for hero graphic */}
-            <div className="w-[400px] h-[250px] bg-white border border-black shadow-2xl skew-y-[-5deg] rotate-[-5deg] flex items-center justify-center">
-              <span className="font-serif text-4xl italic">Jane Doe</span>
+          <div className="relative h-[600px] w-full flex items-center justify-center overflow-hidden">
+            <div className="scale-75 md:scale-100 lg:scale-110">
+                <CardCanvas className="h-full">
+                    <div className="w-[600px] h-[350px] rounded-lg overflow-hidden border-0">
+                        <RolodexCard 
+                            card={LANDING_CARD} 
+                            className="h-full border-none rounded-none bg-white text-black border-2 border-black" 
+                            showBack={false}
+                        />
+                    </div>
+                </CardCanvas>
             </div>
           </div>
         </section>
