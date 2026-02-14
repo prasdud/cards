@@ -12,6 +12,7 @@ To support the customizable, themed cards in the Rolodex and Profile views, the 
   {
     "id": "card_123xyz",
     "owner_id": "user_456",
+    "slug": "patrick-bateman", 
     "content": {
       "name": "Patrick Bateman",
       "role": "Vice President",
@@ -41,14 +42,18 @@ To support the customizable, themed cards in the Rolodex and Profile views, the 
 
 ## Field Definitions
 
-### 1. `content` (The Data)
+### 1. `slug` (Unique Identifier)
+The unique URL path segment for this card.
+- Example: `"patrick-bateman"` results in `domain.com/u/patrick-bateman`
+
+### 2. `content` (The Data)
 Standard contact information displayed on the card face.
 - `name`: (Required) Full display name.
 - `role`: Job title or primary descriptor.
 - `company`: Organization name.
 - `email`: Contact email.
 
-### 2. `style` (The Visuals)
+### 3. `style` (The Visuals)
 Controls the rendering logic in `RolodexCard`.
 
 *   **`theme_variant`**: Maps to CSS class presets.
@@ -70,6 +75,7 @@ This JSON structure maps to the `ContactCard` interface used in `types/card.ts`:
 ```typescript
 export interface ContactCard {
     id: string;
+    slug: string; // New field
     // ... maps from content.*
     theme: {
         variant: CardTheme; // maps from style.theme_variant

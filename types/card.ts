@@ -3,6 +3,7 @@ export type CardTexture = 'noise' | 'grid' | 'lines' | 'circuit' | 'leather';
 
 export interface ContactCard {
     id: string;
+    slug: string; // Added slug field for unique URL
     name: string;
     role: string;
     company: string;

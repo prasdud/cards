@@ -40,9 +40,9 @@ Built with the latest technologies for speed and precision:
 ## Roadmap & TODO
 
 - [ ] Backend logic for saving and sharing cards
-- [ ] Public profile routes (`/u/[username]`)
+- [ ] Public unique card routes (`domain.com/cardname`) - have to add input sanitization for this
 - [ ] Card customization editor
-- [ ] Analytics dashboard for card views
+- [ ] Analytics dashboard for card views - post launch
 
 ---
 

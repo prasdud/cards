@@ -10,29 +10,82 @@ import { CardCanvas } from "@/components/card/card-canvas";
 
 interface RolodexProps {
     cards: ContactCard[];
+    currentIndex?: number;
+    onIndexChange?: (index: number) => void;
 }
 
-export function Rolodex({ cards }: RolodexProps) {
-    const [currentIndex, setCurrentIndex] = useState(0);
+export function Rolodex({ 
+    cards, 
+    currentIndex: controlledIndex, 
+    onIndexChange 
+}: RolodexProps) {
+    const [internalIndex, setInternalIndex] = useState(0);
     const [direction, setDirection] = useState<FlipDirection>(null);
     const [isFlipping, setIsFlipping] = useState(false);
 
+    // Determine current index (controlled vs uncontrolled)
+    const currentIndex = controlledIndex ?? internalIndex;
+
+    const setIndex = useCallback((newIndex: number) => {
+        if (isFlipping) return;
+        
+        const dir = newIndex > currentIndex ? 'down' : 'up';
+        
+        setDirection(dir);
+        setIsFlipping(true);
+        
+        if (onIndexChange) {
+            onIndexChange(newIndex);
+        } else {
+            setInternalIndex(newIndex);
+        }
+        
+        setTimeout(() => setIsFlipping(false), 600);
+    }, [currentIndex, cards.length, isFlipping, onIndexChange]);
+
+
+    // Sync internal direction when controlled prop changes
+    useEffect(() => {
+        if (controlledIndex !== undefined && controlledIndex !== internalIndex) {
+             const dir = controlledIndex > internalIndex ? 'down' : 'up';
+             setDirection(dir);
+             setInternalIndex(controlledIndex); // Sync internal state for reference
+        }
+    }, [controlledIndex, internalIndex]);
+
+
     // Circular Navigation Logic
     const handleNext = useCallback(() => {
-        if (isFlipping || cards.length === 0) return;
-        setIsFlipping(true);
+        if (!cards.length) return;
+        const nextIndex = currentIndex === cards.length - 1 ? 0 : currentIndex + 1;
         setDirection('down');
-        setCurrentIndex((prev) => (prev === cards.length - 1 ? 0 : prev + 1));
+        
+        if (isFlipping) return;
+        setIsFlipping(true);
+        
+        if (onIndexChange) {
+            onIndexChange(nextIndex);
+        } else {
+            setInternalIndex(nextIndex);
+        }
         setTimeout(() => setIsFlipping(false), 600);
-    }, [isFlipping, cards.length]);
+    }, [isFlipping, cards.length, currentIndex, onIndexChange]);
 
     const handlePrev = useCallback(() => {
-        if (isFlipping || cards.length === 0) return;
-        setIsFlipping(true);
+        if (!cards.length) return;
+        const prevIndex = currentIndex === 0 ? cards.length - 1 : currentIndex - 1;
         setDirection('up');
-        setCurrentIndex((prev) => (prev === 0 ? cards.length - 1 : prev - 1));
+        
+        if (isFlipping) return;
+        setIsFlipping(true);
+
+        if (onIndexChange) {
+            onIndexChange(prevIndex);
+        } else {
+            setInternalIndex(prevIndex);
+        }
         setTimeout(() => setIsFlipping(false), 600);
-    }, [isFlipping, cards.length]);
+    }, [isFlipping, cards.length, currentIndex, onIndexChange]);
 
     // Keyboard Support
     useEffect(() => {
@@ -50,6 +103,13 @@ export function Rolodex({ cards }: RolodexProps) {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [handleNext, handlePrev]);
 
+    const handleCardClick = () => {
+        const currentCard = cards[currentIndex];
+        if (currentCard && currentCard.slug) {
+            window.open(`/u/${currentCard.slug}`, '_blank');
+        }
+    };
+
     if (!cards.length) {
         return (
             <div className="flex h-[500px] items-center justify-center text-muted-foreground font-serif italic">
@@ -61,7 +121,6 @@ export function Rolodex({ cards }: RolodexProps) {
     const currentCard = cards[currentIndex];
 
     // Animation Variants
-    // Simulating a physical card flipping on X-axis
     const variants: Variants = {
         enter: (dir: FlipDirection) => ({
             rotateX: dir === 'down' ? -90 : 90,
@@ -111,13 +170,14 @@ export function Rolodex({ cards }: RolodexProps) {
                         initial="enter"
                         animate="center"
                         exit="exit"
-                        className="absolute inset-0 w-full h-full preserve-3d"
-                        style={{ transformOrigin: "bottom center" }} // Axis at bottom like a rolodex
+                        className="absolute inset-0 w-full h-full preserve-3d cursor-pointer"
+                        style={{ transformOrigin: "bottom center" }}
+                        onClick={handleCardClick}
                     >
                         {/* The Card Component */}
-                        <div className="w-full h-full">
+                        <div className="w-full h-full pointer-events-none">
                             <CardCanvas className="h-full">
-                                <div className="w-[600px] h-[350px] shadow-[0_16px_48px_rgba(0,0,0,0.5)] rounded-lg overflow-hidden border border-white/10 bg-[#f8f7f3]">
+                                <div className="w-[600px] h-[350px] shadow-[0_16px_48px_rgba(0,0,0,0.5)] rounded-lg overflow-hidden border border-white/10 bg-[#f8f7f3] pointer-events-auto">
                                     <RolodexCard 
                                         card={currentCard} 
                                         className="h-full border-none rounded-none" 
