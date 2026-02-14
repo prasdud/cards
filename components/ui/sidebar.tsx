@@ -3,15 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { LayoutDashboard, CreditCard, Settings, User, LogOut } from "lucide-react";
+import { LayoutDashboard, CreditCard, Settings, User, LogOut, BookUser } from "lucide-react";
 import { useUser, SignOutButton } from "@clerk/nextjs";
 import { useState, useRef } from "react";
 
 const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+    { name: "Rolodex", href: "/dashboard/rolodex", icon: BookUser },
     { name: "Profile", href: "/dashboard/profile", icon: User },
     { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
+
 
 export function SidebarContent() {
     const pathname = usePathname();
