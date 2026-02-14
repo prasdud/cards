@@ -8,7 +8,6 @@ import { useUser, SignOutButton } from "@clerk/nextjs";
 
 const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-    { name: "Cards", href: "/dashboard/cards", icon: CreditCard },
     { name: "Profile", href: "/dashboard/profile", icon: User },
     { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
